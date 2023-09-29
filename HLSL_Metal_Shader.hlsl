@@ -240,11 +240,6 @@ float4 PS(VertexOut pin) : SV_Target
 	sMat.DiffuseAlbedo.z = blendedColor.z;
 	//-------------------------------------------
 	
-	float3 spotPos;
-	spotPos.x = 1.0;
-	spotPos.y = 0.0;
-	spotPos.z = 0.4;
-	
 	float3 ambient3 = 0.3 * sMat.DiffuseAlbedo;
 	
 	Light spotLight_l;
