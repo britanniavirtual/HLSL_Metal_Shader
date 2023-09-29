@@ -180,7 +180,6 @@ VertexOut VS(VertexIn vin)
 	return vout;
 }
 
-//NB: DX11 luna
 struct DirectionalLight
 {
 	float4 Ambient;
