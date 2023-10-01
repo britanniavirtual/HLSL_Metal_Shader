@@ -4,6 +4,15 @@ TextureCube gCubeMap : register (t16);//Environment reflection cube map (Use the
 SamplerState SampleType;
 SamplerState SampleTypeCubeMap: register(s5);
 
+SamplerState samAnisotropic
+{
+	Filter = ANISOTROPIC;
+	MaxAnisotropy = 4;
+	AddressU = WRAP;
+	AddressV = WRAP;
+	AddressW = WRAP;
+};
+
 //Material of the current object
 cbuffer MaterialBuffer : register(b4)
 {
@@ -73,6 +82,7 @@ float3 ComputeDirectionalLight_3(Light L, Material mat, float3 normal, float3 to
 	return BlinnPhong(lightStrength, lightVec, normal, toEye, mat);
 }
 
+//Std matrix buffer
 cbuffer MatrixBuffer : register(b7)
 {
 	matrix worldMatrix;
@@ -80,6 +90,7 @@ cbuffer MatrixBuffer : register(b7)
 	matrix projectionMatrix;
 };
 
+//Camera pos C buffer
 cbuffer UniBuffer : register(b1)// From ::CameraMatrixBuffer in the cpp!
 {
 	float3 cameraPosition;
@@ -186,17 +197,9 @@ struct DirectionalLight
 	float4 Diffuse;
 	float4 Specular;
 	float3 Direction;
-	float pad;
+	float padding;
 };
 
-SamplerState samAnisotropic
-{
-	Filter = ANISOTROPIC;
-	MaxAnisotropy = 4;
-	AddressU = WRAP;
-	AddressV = WRAP;
-	AddressW = WRAP;
-};
 
 float4 PS(VertexOut pin) : SV_Target
 {
