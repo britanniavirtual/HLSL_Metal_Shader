@@ -117,12 +117,7 @@ struct VertexOut
 	float2 tex : TEXCOORD1;
 	float3 color : COLOR0;
 	float3 cubeTexCoord : TEXCOORD2;
-	
-	float3 lightPos1 : TEXCOORD3;
-	float3 lightPos2 : TEXCOORD4;
-	float3 lightPos3 : TEXCOORD5;
-	float3 lightPos4 : TEXCOORD6;
-	
+
 	float3 viewDirection : TEXCOORD7;
 };
 
@@ -153,39 +148,6 @@ VertexOut VS(VertexIn vin)
 	vout.normal = vin.normal;
 	
 	vout.cubeTexCoord = vin.position;//Set cubemap texture coords
-	
-	//Light positions
-	float3 lightPos1;
-	lightPos1.x = -3.0;
-	lightPos1.y = 1.0;
-	lightPos1.z = 3.0;
-	
-	float3 lightPos2;
-	lightPos2.x = 3.0;
-	lightPos2.y = 1.0;
-	lightPos2.z = 3.0;
-	
-	float3 lightPos3;
-	lightPos3.x = -3.0;
-	lightPos3.y = 1.0;
-	lightPos3.z = -3.0;
-	
-	float3 lightPos4;
-	lightPos4.x = 3.0;
-	lightPos4.y = 1.0;
-	lightPos4.z = -3.0;
-	
-	//Determine the light positions based on the position of the lights and the position of the vertex in the world.
-	vout.lightPos1.xyz = lightPos1.xyz - vin.position.xyz;
-	vout.lightPos2.xyz = lightPos2.xyz - vin.position.xyz;
-	vout.lightPos3.xyz = lightPos3.xyz - vin.position.xyz;
-	vout.lightPos4.xyz = lightPos4.xyz - vin.position.xyz;
-	
-	//Normalize the light position vectors.
-	vout.lightPos1 = normalize(vout.lightPos1);
-	vout.lightPos2 = normalize(vout.lightPos2);
-	vout.lightPos3 = normalize(vout.lightPos3);
-	vout.lightPos4 = normalize(vout.lightPos4);
 	
 	//Compute view direction for specularity
 	worldPosition = mul(vin.position, worldMatrix);
