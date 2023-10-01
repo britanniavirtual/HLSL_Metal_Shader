@@ -1,3 +1,7 @@
+/*
+ * Author: David McHale, <mchale.d@yahoo.com>
+*/
+
 Texture2D shaderTexture : register (t0);//Diffuse texure map
 TextureCube gCubeMap : register (t16);//Environment reflection cube map (Use the .dds sample included)
 
