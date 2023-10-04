@@ -185,8 +185,7 @@ float4 PS(VertexOut pin) : SV_Target
 	float4 reflectionColor = gCubeMap.Sample(samAnisotropic, reflectionVector);
 	cubeMapReflectionColor = reflectionColor;
 	//-----------------------
-	
-	//[LIGHTS]
+
 	float3 result = 0.0f;
 	
 	Material sMat;
