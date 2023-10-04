@@ -95,7 +95,7 @@ cbuffer MatrixBuffer : register(b7)
 };
 
 //Camera pos C buffer
-cbuffer UniBuffer : register(b1)// From ::CameraMatrixBuffer in the cpp!
+cbuffer UniBuffer : register(b1)
 {
 	float3 cameraPosition;
 	float padding;
@@ -111,7 +111,7 @@ struct VertexIn
 
 struct VertexOut
 {
-	float4 position : SV_POSITION;//Not used in the pixel shader!
+	float4 position : SV_POSITION;
 	float3 PosW : POSITION;
 	float3 normal : NORMAL;
 	float2 tex : TEXCOORD1;
@@ -182,7 +182,7 @@ float4 PS(VertexOut pin) : SV_Target
 	float3 cubeMapReflectionColor;
 	float3 incident = -toEyeW;
 	float3 reflectionVector = reflect(incident, pin.normal);
-	float4 reflectionColor = gCubeMap.Sample(samAnisotropic, reflectionVector);//NB: Shader variable is: cubemap type
+	float4 reflectionColor = gCubeMap.Sample(samAnisotropic, reflectionVector);
 	cubeMapReflectionColor = reflectionColor;
 	//-----------------------
 	
@@ -190,7 +190,7 @@ float4 PS(VertexOut pin) : SV_Target
 	float3 result = 0.0f;
 	
 	Material sMat;
-	sMat.DiffuseAlbedo.x = textureDiffuse.x;//NB: Skull mat albdeo is: 1.0/1.0/1.0 in Luna engine
+	sMat.DiffuseAlbedo.x = textureDiffuse.x;
 	sMat.DiffuseAlbedo.y = textureDiffuse.y;
 	sMat.DiffuseAlbedo.z = textureDiffuse.z;
 	sMat.FresnelR0.x = 0.05;
